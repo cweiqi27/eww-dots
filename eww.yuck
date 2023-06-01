@@ -1,0 +1,28 @@
+(defwindow bar :monitor 0
+    :geometry (geometry :x "0%"
+                :y "4px"
+                :width "7%"
+                :height "18px"
+                :anchor "top center")
+    :stacking "fg"
+    :exclusive true
+    :windowtype "dock"
+  (clock))
+
+(defvar time-visible false)   ; for :run-while property of below variable
+                              ; when this turns true, the polling starts and
+                              ; var gets updated with given interval
+
+(defpoll time :interval "1s"
+              :initial "initial-value"  ; optional, defaults to poll at startup
+              :run-while time-visible   ; optional, defaults to 'true'
+  `date +%H:%M:%S`)
+    
+(defwidget clock []
+  (box
+   :class "clock"
+   time)) 
+    
+  
+  
+  
